@@ -14,7 +14,7 @@ const AlbumCard = ({ album }) => (
 		onClick={() => navigate(album.fields.slug)}
 	>
 		<div>
-			<PreviewCompatibleImage imageInfo={album.frontmatter.image} />
+			<PreviewCompatibleImage imageInfo={{image: album.frontmatter.image}} />
 		</div>
 		<div>
 			<h2><Link className="has-text-primary" to={album.fields.slug}>{album.frontmatter.title}</Link></h2>

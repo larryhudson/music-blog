@@ -2,7 +2,7 @@
 templateKey: album
 title: In The Clear
 artist: Spencer Radcliffe
-listen-link:
+listenLinks:
   - link: 'https://spencerradcliffe.bandcamp.com/album/enjoy-the-great-outdoors'
     title: Bandcamp
   - link: 'https://open.spotify.com/album/5HfoiPDS0SBKb8GXoCp9dH'
@@ -12,7 +12,7 @@ date: 2019-01-19T02:10:11.693Z
 blurb: >-
   I've only just gotten into this album, not entirely sure yet but I'm pretty
   sure I like it!
-favourite-songs:
+favouriteSongs:
   - link:
       - link: 'https://spencerradcliffe.bandcamp.com/track/static-electricity'
         title: Bandcamp

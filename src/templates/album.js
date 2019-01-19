@@ -15,6 +15,8 @@ export const AlbumTemplate = ({
   title,
   artist,
   helmet,
+  listenLinks,
+  favouriteSongs,
   image
 }) => {
   const AlbumContent = contentComponent || Content
@@ -26,8 +28,33 @@ export const AlbumTemplate = ({
             </h1>
             <p>{artist}</p>
             <PreviewCompatibleImage imageInfo={{image: image}} style={{height: '500px', objectFit: 'cover'}} />
+        	<p>Listen: </p>
+        	<ul className="listenlinks">
+        	{listenLinks.map(link => (
+                <li key={link.link + `link`}>
+                  <a href={link.link}>{link.title}</a>
+                </li>
+              ))}
+        	</ul>
             <p>{blurb}</p>
             <AlbumContent content={content} />
+            {favouriteSongs && favouriteSongs.length ? (
+			<div>
+				<h4>Favourite songs</h4>
+				<ul className="favouritesongs">
+				{favouriteSongs.map(song => (
+	                <li key={song.title + `favsong`}>
+	                  {song.title}
+	                  <ul className="songlinks">
+	                  {song.link.map(songlink => (
+	                  	<li key={songlink.link + `link`}><a href={songlink.link}>{songlink.title}</a></li>
+	                  	))}
+	                  </ul>
+	                </li>
+	              ))}
+				</ul>
+			</div>
+            ) : null}
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
                 <h4>Tags</h4>
@@ -45,7 +72,7 @@ export const AlbumTemplate = ({
 }
 
 AlbumTemplate.propTypes = {
-  content: PropTypes.object.isRequired,
+  content: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
   blurb: PropTypes.string,
   title: PropTypes.string,
   helmet: PropTypes.object,
@@ -73,6 +100,8 @@ const Album = ({ data }) => {
         title={album.frontmatter.title}
         artist={album.frontmatter.artist}
         image={album.frontmatter.image}
+        listenLinks={album.frontmatter.listenLinks}
+        favouriteSongs={album.frontmatter.favouriteSongs}
       />
     </Layout>
   )
@@ -97,6 +126,17 @@ export const pageQuery = graphql`
         artist
         blurb
         tags
+        listenLinks {
+        	link
+        	title
+        }
+        favouriteSongs {
+        	link {
+        		link
+        		title
+        	}
+        	title
+        }
         image {
 	      id
 	      childImageSharp {

@@ -2,7 +2,7 @@
 templateKey: album
 title: If Blue Could Be Happiness
 artist: Florist
-listen-link:
+listenLinks:
   - link: 'https://florist.bandcamp.com/album/if-blue-could-be-happiness'
     title: Bandcamp
   - link: https://open.spotify.com/track/1uQj8gunYJk1hDtvOPLyED?si=POI5kkwPQk6eXpLGQq0IjA
@@ -12,7 +12,7 @@ date: 2019-01-18T09:26:55.076Z
 blurb: >-
   I really like this album! Been meaning to write something about it for a
   while. Here goes!
-favourite-songs:
+favouriteSongs:
   - link:
       - link: https://florist.bandcamp.com/track/thank-you-light
         title: Bandcamp

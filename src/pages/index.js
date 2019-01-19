@@ -19,7 +19,7 @@ export default class IndexPage extends React.Component {
         }}>
           {albums
               .map(({ node: album }) => (
-                <AlbumCard album={album} />
+                <AlbumCard key={album.id} album={album} />
               ))}
         </div>
       </Layout>

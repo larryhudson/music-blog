@@ -9,6 +9,8 @@ const AlbumPreview = ({ entry, widgetFor }) => (
     tags={entry.getIn(['data', 'tags'])}
     title={entry.getIn(['data', 'title'])}
     image={entry.getIn(['data', 'image'])}
+    favouriteSongs={entry.getIn(['data', 'favouriteSongs'])}
+    listenLinks={entry.getIn(['data', 'listenLinks'])}
   />
 )
 
