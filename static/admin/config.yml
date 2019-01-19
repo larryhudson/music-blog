@@ -19,6 +19,28 @@ collections:
       - {label: "Body", name: "body", widget: "markdown"}
       - {label: "Tags", name: "tags", widget: "list"}
 
+  - name: "albums"
+    label: "Albums"
+    folder: "src/pages/albums"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Template Key", name: "templateKey", widget: "hidden", default: "album"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Artist", name: "artist", widget: "string"}
+      - {label: "Listen link", name: "listen-link", widget: "string"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Blurb", name: "blurb", widget: "text"}
+      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Favourite songs", name: favourite-songs, widget: list, fields:
+          [
+            {label: Title, name: title, widget: string},
+            {label: Link, name: link, widget: string}
+          ]
+        }
+      - {label: "Tags", name: "tags", widget: "list"}
+
   - name: "pages"
     label: "Pages"
     files:
