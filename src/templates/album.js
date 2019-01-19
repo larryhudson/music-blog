@@ -6,6 +6,7 @@ import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 import Content, { HTMLContent } from '../components/Content'
+import SingleAlbum from '../components/SingleAlbum'
 
 export const AlbumTemplate = ({
   content,
@@ -23,11 +24,7 @@ export const AlbumTemplate = ({
   return (
     <section className="section">
       {helmet || ''}
-            <h1>
-              {title}
-            </h1>
-            <p>{artist}</p>
-            <PreviewCompatibleImage imageInfo={{image: image}} style={{height: '500px', objectFit: 'cover'}} />
+            <SingleAlbum title={title} artist={artist} image={image} />
         	<p>Listen: </p>
         	<ul className="listenlinks">
         	{listenLinks.map(link => (
@@ -72,7 +69,7 @@ export const AlbumTemplate = ({
 }
 
 AlbumTemplate.propTypes = {
-  content: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
+  content: PropTypes.object.isRequired,
   blurb: PropTypes.string,
   title: PropTypes.string,
   helmet: PropTypes.object,

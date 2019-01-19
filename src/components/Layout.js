@@ -17,7 +17,7 @@ const TemplateWrapper = ({ children }) => (
     `}
     render={data => (
       <div style={{
-          maxWidth: '42rem',
+          maxWidth: '60rem',
           margin: '0 auto',
         }}>
         <Helmet>

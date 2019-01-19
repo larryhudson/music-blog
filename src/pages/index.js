@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import AlbumCard from '../components/AlbumCard'
+import AlbumCollection from '../components/AlbumCollection'
 import Layout from '../components/Layout'
 import { graphql } from 'gatsby'
+import "../styles/index.scss"
 
 export default class IndexPage extends React.Component {
   render() {
@@ -11,16 +12,8 @@ export default class IndexPage extends React.Component {
 
     return (
       <Layout>
-        <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gridColumnGap: '10px'
-        }}>
-          {albums
-              .map(({ node: album }) => (
-                <AlbumCard key={album.id} album={album} />
-              ))}
+        <div>
+          <AlbumCollection albums={albums} />
         </div>
       </Layout>
     )
@@ -54,7 +47,7 @@ export const pageQuery = graphql`
             image {
               id
               childImageSharp {
-                fluid( maxWidth: 250 ) {
+                fluid( maxWidth: 200 ) {
                   ...GatsbyImageSharpFluid
                 }
               }

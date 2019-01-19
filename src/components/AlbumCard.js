@@ -4,12 +4,7 @@ import { navigate } from 'gatsby'
 import PreviewCompatibleImage from './PreviewCompatibleImage'
 
 const AlbumCard = ({ album }) => (
-	<div
-		style={{
-			cursor: 'pointer',
-			border: '1px black solid',
-			borderRadius: '0.5em',
-			padding: '1em'}}
+	<div className="album"
 		key={album.id}
 		onClick={() => navigate(album.fields.slug)}
 	>
