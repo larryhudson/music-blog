@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-netlify-cms",
-  "description": "Example Gatsby, and Netlify CMS project",
+  "name": "larry-music-blog",
+  "description": "Lazy music blog. Focusing on the programming more than the writing",
   "version": "1.1.3",
-  "author": "Austin Green",
+  "author": "Larry Hudson",
   "dependencies": {
     "bulma": "^0.7.0",
     "gatsby": "^2.0.66",
@@ -13,6 +13,7 @@
     "gatsby-plugin-react-helmet": "^3.0.4",
     "gatsby-plugin-sass": "^2.0.7",
     "gatsby-plugin-sharp": "^2.0.15",
+    "gatsby-plugin-typography": "^2.2.5",
     "gatsby-remark-copy-linked-files": "^2.0.7",
     "gatsby-remark-images": "^3.0.1",
     "gatsby-remark-relative-images": "^0.2.1",
@@ -28,6 +29,9 @@
     "react": "^16.2.0",
     "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
+    "react-typography": "^0.16.18",
+    "typography": "^0.16.18",
+    "typography-theme-github": "^0.16.18",
     "uuid": "^3.2.1"
   },
   "keywords": [
@@ -39,7 +43,7 @@
     "start": "npm run develop",
     "clean": "rimraf .cache public",
     "build": "npm run clean && gatsby build",
-    "develop": "npm run clean && gatsby develop",
+    "develop": "npm run clean && gatsby develop -p 3000",
     "serve": "gatsby serve",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"{gatsby-*.js,src/**/*.js}\"",
     "test": "echo \"Error: no test specified\" && exit 1"

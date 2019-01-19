@@ -2,16 +2,14 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
+import AlbumCard from '../components/AlbumCard'
 
 class TagRoute extends React.Component {
   render() {
-    const posts = this.props.data.allMarkdownRemark.edges
-    const postLinks = posts.map(post => (
-      <li key={post.node.fields.slug}>
-        <Link to={post.node.fields.slug}>
-          <h2 className="is-size-2">{post.node.frontmatter.title}</h2>
-        </Link>
-      </li>
+    const { data } = this.props
+    const { edges: albums } = data.allMarkdownRemark
+    const albumLinks = albums.map(({ node: album }) => (
+      <AlbumCard album={album} />
     ))
     const tag = this.props.pageContext.tag
     const title = this.props.data.site.siteMetadata.title
@@ -31,7 +29,7 @@ class TagRoute extends React.Component {
                 style={{ marginBottom: '6rem' }}
               >
                 <h3 className="title is-size-4 is-bold-light">{tagHeader}</h3>
-                <ul className="taglist">{postLinks}</ul>
+                <ul className="taglist">{albumLinks}</ul>
                 <p>
                   <Link to="/tags/">Browse all tags</Link>
                 </p>
@@ -56,16 +54,29 @@ export const tagPageQuery = graphql`
     allMarkdownRemark(
       limit: 1000
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: { frontmatter: { tags: { in: [$tag] }, templateKey: { eq: "album" } } }
     ) {
       totalCount
       edges {
         node {
+          id
           fields {
             slug
           }
           frontmatter {
             title
+            artist
+            blurb
+            image {
+              id
+              childImageSharp {
+                fixed(width: 500, height: 500) {
+                  ...GatsbyImageSharpFixed
+                }
+              }
+            }
+            templateKey
+            date(formatString: "MMMM DD, YYYY")
           }
         }
       }

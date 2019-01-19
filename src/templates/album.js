@@ -4,29 +4,26 @@ import { kebabCase } from 'lodash'
 import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
-import Content, { HTMLContent } from '../components/Content'
+import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 
 export const AlbumTemplate = ({
   content,
   contentComponent,
-  description,
+  blurb,
   tags,
   title,
   helmet,
+  image
 }) => {
-  const AlbumContent = contentComponent || Content
-
   return (
     <section className="section">
       {helmet || ''}
-      <div className="container content">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
+            <h1>
               {title}
             </h1>
-            <p>{description}</p>
-            <AlbumContent content={content} />
+            <PreviewCompatibleImage imageInfo={image} style={{height: '500px', objectFit: 'cover'}} />
+            <p>{blurb}</p>
+            <div dangerouslySetInnerHTML={{__html: content}} />
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
                 <h4>Tags</h4>
@@ -39,19 +36,17 @@ export const AlbumTemplate = ({
                 </ul>
               </div>
             ) : null}
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
   )
 }
 
 AlbumTemplate.propTypes = {
-  content: PropTypes.node.isRequired,
+  content: PropTypes.object.isRequired,
   contentComponent: PropTypes.func,
   description: PropTypes.string,
   title: PropTypes.string,
   helmet: PropTypes.object,
+  image: PropTypes.object
 }
 
 const Album = ({ data }) => {
@@ -61,7 +56,6 @@ const Album = ({ data }) => {
     <Layout>
       <AlbumTemplate
         content={album.html}
-        contentComponent={HTMLContent}
         blurb={album.frontmatter.blurb}
         helmet={
           <Helmet
@@ -73,6 +67,7 @@ const Album = ({ data }) => {
         }
         tags={album.frontmatter.tags}
         title={album.frontmatter.title}
+        image={album.frontmatter.image}
       />
     </Layout>
   )
@@ -96,6 +91,14 @@ export const pageQuery = graphql`
         title
         blurb
         tags
+        image {
+	      id
+	      childImageSharp {
+	        fluid(maxWidth: 1000) {
+	          ...GatsbyImageSharpFluid
+	        }
+	      }
+	    }
       }
     }
   }

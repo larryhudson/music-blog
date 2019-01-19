@@ -1,9 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from "gatsby"
-
-import Navbar from '../components/Navbar'
-import './all.sass'
+import Link from 'gatsby-link'
 
 const TemplateWrapper = ({ children }) => (
   <StaticQuery
@@ -18,7 +16,10 @@ const TemplateWrapper = ({ children }) => (
         }
     `}
     render={data => (
-      <div>
+      <div style={{
+          maxWidth: '42rem',
+          margin: '0 auto',
+        }}>
         <Helmet>
           <html lang="en" />
           <title>{data.site.siteMetadata.title}</title>
@@ -31,12 +32,16 @@ const TemplateWrapper = ({ children }) => (
 	        <link rel="mask-icon" href="/img/safari-pinned-tab.svg" color="#ff4400" />
 	        <meta name="theme-color" content="#fff" />
 
-	        <meta property="og:type" content="business.business" />
           <meta property="og:title" content={data.site.siteMetadata.title} />
           <meta property="og:url" content="/" />
           <meta property="og:image" content="/img/og-image.jpg" />
         </Helmet>
-        <Navbar />
+        <header>
+        <Link to="/">
+          <h1>Lazy music blog</h1>
+        </Link>
+        <p>Using this to write about music and learn web dev stuff.</p>
+        </header>
         <div>{children}</div>
       </div>
     )}
