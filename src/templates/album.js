@@ -5,6 +5,7 @@ import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
+import Content, { HTMLContent } from '../components/Content'
 
 export const AlbumTemplate = ({
   content,
@@ -12,18 +13,21 @@ export const AlbumTemplate = ({
   blurb,
   tags,
   title,
+  artist,
   helmet,
   image
 }) => {
+  const AlbumContent = contentComponent || Content
   return (
     <section className="section">
       {helmet || ''}
             <h1>
               {title}
             </h1>
-            <PreviewCompatibleImage imageInfo={image} style={{height: '500px', objectFit: 'cover'}} />
+            <p>{artist}</p>
+            <PreviewCompatibleImage imageInfo={{image: image}} style={{height: '500px', objectFit: 'cover'}} />
             <p>{blurb}</p>
-            <div dangerouslySetInnerHTML={{__html: content}} />
+            <AlbumContent content={content} />
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
                 <h4>Tags</h4>
@@ -42,11 +46,10 @@ export const AlbumTemplate = ({
 
 AlbumTemplate.propTypes = {
   content: PropTypes.object.isRequired,
-  contentComponent: PropTypes.func,
-  description: PropTypes.string,
+  blurb: PropTypes.string,
   title: PropTypes.string,
   helmet: PropTypes.object,
-  image: PropTypes.object
+  image: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 }
 
 const Album = ({ data }) => {
@@ -57,6 +60,7 @@ const Album = ({ data }) => {
       <AlbumTemplate
         content={album.html}
         blurb={album.frontmatter.blurb}
+        contentComponent={HTMLContent}
         helmet={
           <Helmet
             titleTemplate="%s | Album"
@@ -67,6 +71,7 @@ const Album = ({ data }) => {
         }
         tags={album.frontmatter.tags}
         title={album.frontmatter.title}
+        artist={album.frontmatter.artist}
         image={album.frontmatter.image}
       />
     </Layout>
@@ -89,6 +94,7 @@ export const pageQuery = graphql`
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title
+        artist
         blurb
         tags
         image {

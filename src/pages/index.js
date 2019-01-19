@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import AlbumCard from '../components/AlbumCard'
 import Layout from '../components/Layout'
+import { graphql } from 'gatsby'
 
 export default class IndexPage extends React.Component {
   render() {
