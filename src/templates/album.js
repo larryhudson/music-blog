@@ -8,7 +8,8 @@ import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 import Content, { HTMLContent } from '../components/Content'
 import SingleAlbum from '../components/SingleAlbum'
 import Button from '../components/Button'
-import SongList from '../components/SongList'
+import styled from 'styled-components'
+import "../styles/blockItemDottedBorder.css"
 
 export const AlbumTemplate = ({
   content,
@@ -28,63 +29,119 @@ export const AlbumTemplate = ({
       {helmet || ''}
 
           {/* album cover */}
-          <section className="pv3">
+          <Section>
+
             <SingleAlbum title={title} artist={artist} image={image} />
-          </section>
+
+          </Section>
 
           {/* listen links */}
-          <section className="pv2">
-          	<h4 className="di">Listen:</h4>
-            <ul className="di list">
+          <Section>
+
+          	<InlineH4>Listen:</InlineH4>
+
+            <InlineList>
           	{listenLinks.map(link => (
-              <li key={link.link + `link`} className="dib mr2">
+
+              <InlineListItem key={link.link + `link`}>
                   <Button link={link.link} component="a">{link.title}</Button>
-              </li>
-                ))}
-            </ul>
-          </section>
+              </InlineListItem>
+
+              ))}
+            </InlineList>
+
+          </Section>
 
             {/* post content */}
-            <section className="pv2 lh-copy">
-            <p>{blurb}</p>
-            <AlbumContent content={content} />
-            </section>
+            <Section>
+
+                <CopySection>
+
+                  <p>{blurb}</p>
+
+                  <AlbumContent content={content} />
+
+                </CopySection>
+
+            </Section>
 
             {/* favourite songs */}
             {favouriteSongs && favouriteSongs.length ? (
-        			<section className="pv2">
+        			<Section>
+
         				<h4>Favourite songs</h4>
+
         				<SongList>
         				{favouriteSongs.map(song => (
-        	                <li key={song.title + `favsong`} className="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
-        	                  {song.title}
-                            <span className="ml2">
-        	                  {song.link.map(songlink => (
-                              <Button key={songlink.link + `link`} link={songlink.link} component="a">{songlink.title}</Button>
-        	                  	))}
-                            </span>
-        	                </li>
-        	              ))}
+
+                  <SongListItem key={song.title + `favsong`}>
+                    {song.title}
+
+                    <span className="ml2">
+                        {song.link.map(songlink => (
+                          <Button key={songlink.link + `link`} link={songlink.link} component="a">{songlink.title}</Button>
+                        ))}
+                    </span>
+
+                  </SongListItem>
+
+        	      ))}
         				</SongList>
-        			</section>
+
+        			</Section>
               ) : null}
 
             {/* tags */}
             {tags && tags.length ? (
+
               <section className="pb2 pt4">
-                <h4 className="di">Tags</h4>
-                <ul className="di list">
+
+                <InlineH4>Tags</InlineH4>
+
+                <InlineList>
+
                   {tags.map(tag => (
-                    <li key={tag + `tag`} className="dib mr2">
+
+                    <InlineListItem key={tag + `tag`}>
                       <Button link={`/tags/${kebabCase(tag)}/`} component="Link">{tag}</Button>
-                    </li>
+                    </InlineListItem>
+
                   ))}
-                </ul>
+
+                </InlineList>
               </section>
             ) : null}
       </section>
   )
 }
+
+const Section = styled.section.attrs({
+  className: "pv2",
+})``
+
+const CopySection = styled.div.attrs({
+  className: "lh-copy measure",
+})``
+
+const SongList = styled.ul.attrs({
+  className: "list ph0 mh0 measure",
+})``
+
+const SongListItem = styled.li.attrs({
+  className: "lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30",
+})``
+
+const InlineList = styled.ul.attrs({
+  className: "di list",
+})``
+
+const InlineListItem = styled.li.attrs({
+  className: "dib mr2",
+})``
+
+const InlineH4 = styled.h4.attrs({
+  className: "di",
+})``
 
 AlbumTemplate.propTypes = {
   content: PropTypes.object.isRequired,

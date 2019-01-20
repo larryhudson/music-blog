@@ -63,6 +63,7 @@ module.exports = {
         modulePath: `${__dirname}/src/cms/cms.js`,
       },
     },
+    `gatsby-plugin-styled-components`,
     // {
     //   resolve:'gatsby-plugin-purgecss', // purges all unused/unreferenced css rules
     //   options: {

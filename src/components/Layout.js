@@ -3,6 +3,7 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from "gatsby"
 import Link from 'gatsby-link'
 import "../styles/tachyons.scss"
+import styled from 'styled-components'
 
 const TemplateWrapper = ({ children }) => (
   <StaticQuery
@@ -17,7 +18,7 @@ const TemplateWrapper = ({ children }) => (
         }
     `}
     render={data => (
-      <div className="mw7-ns center bg-light-gray pa3 ph5-ns sans-serif">
+      <Container>
         <Helmet>
           <html lang="en" />
           <title>{data.site.siteMetadata.title}</title>
@@ -35,15 +36,27 @@ const TemplateWrapper = ({ children }) => (
           <meta property="og:image" content="/img/og-image.jpg" />
         </Helmet>
         <header>
-        <Link to="/" className="link underline-hover">
-          <h1 className="f2 black">Lazy music blog</h1>
-        </Link>
+        <HeaderLink to="/">
+          <H1>Lazy music blog</H1>
+        </HeaderLink>
         <p>Using this to write about music and learn web dev stuff.</p>
         </header>
         <div>{children}</div>
-      </div>
+      </Container>
     )}
   />
 )
+
+const Container = styled.div.attrs({
+  className: "mw7-ns center bg-light-gray pa3 ph5-ns sans-serif",
+})``
+
+const HeaderLink = styled(Link).attrs({
+  className: "link underline-hover",
+})``
+
+const H1 = styled.h1.attrs({
+  className: "f2 black"
+})``
 
 export default TemplateWrapper
