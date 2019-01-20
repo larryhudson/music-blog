@@ -1,6 +1,6 @@
 ---
 templateKey: album
-title: In The Clear
+title: Enjoy the Great Outdoors
 artist: Spencer Radcliffe
 listenLinks:
   - link: 'https://spencerradcliffe.bandcamp.com/album/enjoy-the-great-outdoors'
