@@ -2,6 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from "gatsby"
 import Link from 'gatsby-link'
+import "../styles/tachyons.scss"
 
 const TemplateWrapper = ({ children }) => (
   <StaticQuery
@@ -16,10 +17,7 @@ const TemplateWrapper = ({ children }) => (
         }
     `}
     render={data => (
-      <div style={{
-          maxWidth: '60rem',
-          margin: '0 auto',
-        }}>
+      <div className="mw7-ns center bg-light-gray pa3 ph5-ns">
         <Helmet>
           <html lang="en" />
           <title>{data.site.siteMetadata.title}</title>
@@ -38,7 +36,7 @@ const TemplateWrapper = ({ children }) => (
         </Helmet>
         <header>
         <Link to="/">
-          <h1>Lazy music blog</h1>
+          <h1 className="link">Lazy music blog</h1>
         </Link>
         <p>Using this to write about music and learn web dev stuff.</p>
         </header>

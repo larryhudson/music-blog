@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import AlbumCollection from '../components/AlbumCollection'
 import Layout from '../components/Layout'
 import { graphql } from 'gatsby'
-import "../styles/index.scss"
 
 export default class IndexPage extends React.Component {
   render() {

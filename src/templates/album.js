@@ -7,6 +7,8 @@ import Layout from '../components/Layout'
 import PreviewCompatibleImage from '../components/PreviewCompatibleImage'
 import Content, { HTMLContent } from '../components/Content'
 import SingleAlbum from '../components/SingleAlbum'
+import Button from '../components/Button'
+import SongList from '../components/SongList'
 
 export const AlbumTemplate = ({
   content,
@@ -25,37 +27,34 @@ export const AlbumTemplate = ({
     <section className="section">
       {helmet || ''}
             <SingleAlbum title={title} artist={artist} image={image} />
-        	<p>Listen: </p>
-        	<ul className="listenlinks">
+        	<p><span>Listen: </span>
         	{listenLinks.map(link => (
-                <li key={link.link + `link`}>
-                  <a href={link.link}>{link.title}</a>
-                </li>
+                  <Button key={link.link + `link`} link={link.link} component="a">{link.title}</Button>
               ))}
-        	</ul>
+          </p>
             <p>{blurb}</p>
             <AlbumContent content={content} />
             {favouriteSongs && favouriteSongs.length ? (
 			<div>
 				<h4>Favourite songs</h4>
-				<ul className="favouritesongs">
+				<SongList>
 				{favouriteSongs.map(song => (
-	                <li key={song.title + `favsong`}>
+	                <li key={song.title + `favsong`} className="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
 	                  {song.title}
-	                  <ul className="songlinks">
+                    <span className="ml2">
 	                  {song.link.map(songlink => (
-	                  	<li key={songlink.link + `link`}><a href={songlink.link}>{songlink.title}</a></li>
+                      <Button key={songlink.link + `link`} link={songlink.link} component="a">{songlink.title}</Button>
 	                  	))}
-	                  </ul>
+                    </span>
 	                </li>
 	              ))}
-				</ul>
+				</SongList>
 			</div>
             ) : null}
             {tags && tags.length ? (
               <div style={{ marginTop: `4rem` }}>
                 <h4>Tags</h4>
-                <ul className="taglist">
+                <ul className="">
                   {tags.map(tag => (
                     <li key={tag + `tag`}>
                       <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
