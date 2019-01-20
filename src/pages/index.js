@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import AlbumCollection from '../components/AlbumCollection'
+import AlbumCard from '../components/AlbumCard'
 import Layout from '../components/Layout'
 import { graphql } from 'gatsby'
 
@@ -12,7 +13,11 @@ export default class IndexPage extends React.Component {
     return (
       <Layout>
         <div>
-          <AlbumCollection albums={albums} />
+          <AlbumCollection>
+          {albums.map(({ node: album }) => (
+            <AlbumCard album={album} />
+          ))}
+          </AlbumCollection>
         </div>
       </Layout>
     )

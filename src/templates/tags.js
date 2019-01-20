@@ -3,6 +3,7 @@ import Helmet from 'react-helmet'
 import { Link, graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import AlbumCard from '../components/AlbumCard'
+import AlbumCollection from '../components/AlbumCollection'
 
 class TagRoute extends React.Component {
   render() {
@@ -29,7 +30,7 @@ class TagRoute extends React.Component {
                 style={{ marginBottom: '6rem' }}
               >
                 <h3 className="title is-size-4 is-bold-light">{tagHeader}</h3>
-                <ul className="taglist">{albumLinks}</ul>
+                <AlbumCollection>{albumLinks}</AlbumCollection>
                 <p>
                   <Link to="/tags/">Browse all tags</Link>
                 </p>
@@ -70,8 +71,8 @@ export const tagPageQuery = graphql`
             image {
               id
               childImageSharp {
-                fixed(width: 500, height: 500) {
-                  ...GatsbyImageSharpFixed
+                fluid(maxWidth: 200) {
+                  ...GatsbyImageSharpFluid
                 }
               }
             }

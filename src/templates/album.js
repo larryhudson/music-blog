@@ -26,42 +26,61 @@ export const AlbumTemplate = ({
   return (
     <section className="section">
       {helmet || ''}
+
+          {/* album cover */}
+          <section className="pv3">
             <SingleAlbum title={title} artist={artist} image={image} />
-        	<p><span>Listen: </span>
-        	{listenLinks.map(link => (
-                  <Button key={link.link + `link`} link={link.link} component="a">{link.title}</Button>
-              ))}
-          </p>
+          </section>
+
+          {/* listen links */}
+          <section className="pv2">
+          	<h4 className="di">Listen:</h4>
+            <ul className="di list">
+          	{listenLinks.map(link => (
+              <li key={link.link + `link`} className="dib mr2">
+                  <Button link={link.link} component="a">{link.title}</Button>
+              </li>
+                ))}
+            </ul>
+          </section>
+
+            {/* post content */}
+            <section className="pv2 lh-copy">
             <p>{blurb}</p>
             <AlbumContent content={content} />
+            </section>
+
+            {/* favourite songs */}
             {favouriteSongs && favouriteSongs.length ? (
-			<div>
-				<h4>Favourite songs</h4>
-				<SongList>
-				{favouriteSongs.map(song => (
-	                <li key={song.title + `favsong`} className="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
-	                  {song.title}
-                    <span className="ml2">
-	                  {song.link.map(songlink => (
-                      <Button key={songlink.link + `link`} link={songlink.link} component="a">{songlink.title}</Button>
-	                  	))}
-                    </span>
-	                </li>
-	              ))}
-				</SongList>
-			</div>
-            ) : null}
+        			<section className="pv2">
+        				<h4>Favourite songs</h4>
+        				<SongList>
+        				{favouriteSongs.map(song => (
+        	                <li key={song.title + `favsong`} className="lh-copy pv3 ba bl-0 bt-0 br-0 b--dotted b--black-30">
+        	                  {song.title}
+                            <span className="ml2">
+        	                  {song.link.map(songlink => (
+                              <Button key={songlink.link + `link`} link={songlink.link} component="a">{songlink.title}</Button>
+        	                  	))}
+                            </span>
+        	                </li>
+        	              ))}
+        				</SongList>
+        			</section>
+              ) : null}
+
+            {/* tags */}
             {tags && tags.length ? (
-              <div style={{ marginTop: `4rem` }}>
-                <h4>Tags</h4>
-                <ul className="">
+              <section className="pb2 pt4">
+                <h4 className="di">Tags</h4>
+                <ul className="di list">
                   {tags.map(tag => (
-                    <li key={tag + `tag`}>
-                      <Link to={`/tags/${kebabCase(tag)}/`}>{tag}</Link>
+                    <li key={tag + `tag`} className="dib mr2">
+                      <Button link={`/tags/${kebabCase(tag)}/`} component="Link">{tag}</Button>
                     </li>
                   ))}
                 </ul>
-              </div>
+              </section>
             ) : null}
       </section>
   )

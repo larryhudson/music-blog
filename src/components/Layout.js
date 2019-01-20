@@ -17,7 +17,7 @@ const TemplateWrapper = ({ children }) => (
         }
     `}
     render={data => (
-      <div className="mw7-ns center bg-light-gray pa3 ph5-ns">
+      <div className="mw7-ns center bg-light-gray pa3 ph5-ns sans-serif">
         <Helmet>
           <html lang="en" />
           <title>{data.site.siteMetadata.title}</title>
@@ -35,8 +35,8 @@ const TemplateWrapper = ({ children }) => (
           <meta property="og:image" content="/img/og-image.jpg" />
         </Helmet>
         <header>
-        <Link to="/">
-          <h1 className="link">Lazy music blog</h1>
+        <Link to="/" className="link underline-hover">
+          <h1 className="f2 black">Lazy music blog</h1>
         </Link>
         <p>Using this to write about music and learn web dev stuff.</p>
         </header>
